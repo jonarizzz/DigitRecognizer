@@ -1,4 +1,4 @@
-import data.data_converter as dc
+import data_converter as dc
 
 TRAIN_FILENAME = "data/train.csv"
 TEST_FILENAME = "data/test.csv"
