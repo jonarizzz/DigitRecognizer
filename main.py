@@ -1,28 +1,18 @@
 import data_converter as dc
+import tensorflow as tf
 
 TRAIN_FILENAME = "data/train.csv"
 TEST_FILENAME = "data/test.csv"
 
 data = dc.csv_data_reader(TRAIN_FILENAME)
 dc.detach_labels(data)
-data = dc.transform_to_array(data)
+train_data = dc.transform_to_array(data)
+test_data = dc.transform_to_array(dc.csv_data_reader(TEST_FILENAME))
 
-print(data[0][0])
-print(data[0][1])
-print(data[0][2])
-print(data[0][3])
-print(data[0][4])
-print(data[0][5])
-print(data[0][6])
-print(data[0][7])
+learning_rate = 0.01
+training_iteration = 30
+batch_size = 100
+display_step = 2
 
-data = dc.transform_to_array(dc.csv_data_reader(TEST_FILENAME))
-
-print(data[0][0])
-print(data[0][1])
-print(data[0][2])
-print(data[0][3])
-print(data[0][4])
-print(data[0][5])
-print(data[0][6])
-print(data[0][7])
+# x = tf.placeholder("float", [None, 784])
+print(tf.__version__)
