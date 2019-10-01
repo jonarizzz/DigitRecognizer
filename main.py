@@ -1,20 +1,6 @@
-import os
-import random
-import numpy as np  # linear algebra
 import pandas as pd  # data processing, CSV file I/O (e.g. pd.read_csv)
-import matplotlib.pyplot as plt
 import tensorflow as tf
-from tensorflow import keras
 from keras.preprocessing.image import ImageDataGenerator
-
-# Input data files are available in the "../input/" directory.
-# For example, running this (by clicking run or pressing Shift+Enter) will list all files under the input directory
-
-import os
-
-for dirname, _, filenames in os.walk('input'):
-    for filename in filenames:
-        print(os.path.join(dirname, filename))
 
 # load data from kaggle dataset
 train_data = pd.read_csv("input/train.csv", header=0)
@@ -32,11 +18,6 @@ test_img.resize(28000, 28, 28, 1)
 submission = pd.read_csv("input/sample_submission.csv", header=0)
 submission.head()
 
-# plot some examples
-samples = np.random.randint(0, 10, 2)
-for i in samples:
-    plt.imshow(np.resize(train_img[i], (28, 28)))
-    plt.show()
 
 # to get 1.00 accuracy, train on entire MNIST dataset, added from kaggle datasets in .csv
 mnist_train = pd.read_csv("input/mnist_train.csv")
@@ -95,5 +76,5 @@ history = model.fit_generator(datagen.flow(mnist_train_img, mnist_train_label, b
 
 predictions = model.predict(test_img).argmax(axis=1)
 
-results = pd.DataFrame({"ImageId": range(1, len(test_img)+1), "Label": predictions})
+results = pd.DataFrame({"ImageId": range(1, len(test_img) + 1), "Label": predictions})
 results.to_csv("predictions_submission.csv", header=True, index=False)
