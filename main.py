@@ -1,3 +1,4 @@
+import zipfile
 import pandas as pd  # data processing, CSV file I/O (e.g. pd.read_csv)
 import tensorflow as tf
 from keras.preprocessing.image import ImageDataGenerator
@@ -20,6 +21,9 @@ submission.head()
 
 
 # to get 1.00 accuracy, train on entire MNIST dataset, added from kaggle datasets in .csv
+# due to size of files they can't be pulled from git as is, so they need to be decompressed first
+with zipfile.ZipFile("input/input.zip", 'r') as zip_ref:
+    zip_ref.extractall("")
 mnist_train = pd.read_csv("input/mnist_train.csv")
 mnist_test = pd.read_csv("input/mnist_test.csv")
 mnist = pd.concat([mnist_train, mnist_test], axis=0)
